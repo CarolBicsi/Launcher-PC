@@ -441,6 +441,9 @@ namespace YuukiPS_Launcher
                 }
             }
 
+            // foce HoyoPass disable
+            Tool.RemoveHoyoPassEnable(selectedGame);
+
             // For Game
             if (progress == null)
             {

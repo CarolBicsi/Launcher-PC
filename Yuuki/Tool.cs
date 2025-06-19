@@ -145,5 +145,51 @@ namespace YuukiPS_Launcher.Yuuki
             }
         }
 
+        public static void RemoveHoyoPassEnable(Json.GameType game)
+        {
+            string keyName = "Software\\miHoYo"; // default value to not delete PC system. learned this the hard way!!
+            string subKeyName = "Genshin Impact";
+
+            if (game == Json.GameType.GenshinImpact)
+            {
+                keyName = "Software\\miHoYo";
+                subKeyName = "Genshin Impact";
+            }
+            else if (game == Json.GameType.StarRail)
+            {
+                keyName = "Software\\Cognosphere";
+                subKeyName = "Star Rail";
+            }
+
+            using RegistryKey? key = Registry.CurrentUser.OpenSubKey(keyName, true);
+            if (key == null)
+            {
+                return;
+            }
+            else
+            {
+                try
+                {
+                    using RegistryKey? subKey = key.OpenSubKey(subKeyName, true);
+                    if (subKey != null)
+                    {
+                        string[] valueNames = subKey.GetValueNames();
+                        foreach (string valueName in valueNames)
+                        {
+                            if (valueName.StartsWith("HOYO_PASS_ENABLE", StringComparison.OrdinalIgnoreCase))
+                            {
+                                Logger($"Removing {valueName} from {subKeyName}", ConsoleColor.Yellow);
+                                subKey.DeleteValue(valueName);
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    Logger("Failed to remove HOYO_PASS_ENABLE keys", ConsoleColor.Red);
+                }
+            }
+        }
+
     }
 }

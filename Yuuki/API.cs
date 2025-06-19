@@ -18,6 +18,7 @@ namespace YuukiPS_Launcher.Yuuki
 
         public static Patch? GetMD5Game(string md5, GameType typeGame)
         {
+            /*
             // Define the path to the local file
             var localFilePath = Path.Combine(Json.Config.DataConfig, "md5", $"{typeGame.SEOUrl()}", $"{md5.ToUpper()}.json");
 
@@ -39,8 +40,9 @@ namespace YuukiPS_Launcher.Yuuki
                     Logger.Error("API", $"Error reading local patch file: {ex.Message} > {localFilePath}");
                 }
             }
+            */
 
-            // If the local file is not found, proceed with the API request
+            // keep load info online
             var url = "/json/" + typeGame.SEOUrl() + "/version/patch/v2/" + md5.ToUpper() + ".json?time=" + DateTime.UtcNow.ToString("yyyyMMddHHmmss");
 
             var client = new RestClient(WebLink);
@@ -65,10 +67,10 @@ namespace YuukiPS_Launcher.Yuuki
                         Directory.CreateDirectory(saveMd5);
 
                         // Log saving the file
-                        Logger.Info("API", $"Saving patch data to local file: {localFilePath}");
+                        //Logger.Info("API", $"Saving patch data to local file: {localFilePath}");
 
                         // Save the response content to a local file
-                        File.WriteAllText(localFilePath, isContent);
+                        //File.WriteAllText(localFilePath, isContent);
 
                         return patch;
                     }

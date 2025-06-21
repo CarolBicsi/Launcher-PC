@@ -420,24 +420,39 @@ namespace YuukiPS_Launcher
             // For Cheat (tmp)
             if (isCheat)
             {
-                Logger.Info("Cheat", "Cheat enabled");
+                Logger.Info("Cheat", "Cheat enabled, looking for custom launcher.");
                 try
                 {
-                    var getFileCheat = API.GetCheat(selectedGame, GameChannel, VersionGame, cstGameFile);
-                    if (getFileCheat == null)
+                    var customCheatFolder = Path.Combine(Config.Modfolder, "Cheat", selectedGame.ToString(), "CustomCheat");
+                    string customLauncher = "";
+
+                    if (Directory.Exists(customCheatFolder))
                     {
-                        MessageBox.Show("No cheats are available for this game version. Please disable the cheat feature in the settings to launch the game.", "Cheat Unavailable", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        var launchers = Directory.GetFiles(customCheatFolder, "*.exe", SearchOption.AllDirectories);
+                        if (launchers.Any())
+                        {
+                            customLauncher = launchers[0];
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(customLauncher))
+                    {
+                        cstGameFile = customLauncher;
+                        WatchCheat = Path.GetFileNameWithoutExtension(cstGameFile);
+                        Logger.Info("Cheat", $"Found custom cheat, RUN: Monitor {WatchCheat} at {cstGameFile}");
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Custom cheat launcher not found.\n\nPlease place your cheat launcher (.exe) inside:\n{customCheatFolder}", "Custom Cheat Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         ExtraCheat.Checked = false;
                         return;
                     }
-                    cstGameFile = getFileCheat.Launcher;
-                    WatchCheat = Path.GetFileNameWithoutExtension(cstGameFile);
-                    Logger.Info("Cheat", $"RUN: Monitor {WatchCheat} at {cstGameFile}");
-
                 }
                 catch (Exception x)
                 {
                     Logger.Error("Cheat", $"Error: {x.Message}");
+                    MessageBox.Show($"An error occurred while trying to load the custom cheat:\n{x.Message}", "Cheat Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
             }
 

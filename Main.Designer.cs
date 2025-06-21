@@ -40,6 +40,7 @@
             Set_LA_Select = new Button();
             Set_LA_GameFolder = new TextBox();
             label5 = new Label();
+            label8 = new Label();
             stIsRunProxy = new Label();
             groupBox8 = new GroupBox();
             btStartYuukiServer = new Button();
@@ -50,7 +51,6 @@
             GetProfileServer = new ComboBox();
             btload = new Button();
             btsave = new Button();
-            label8 = new Label();
             grExtra = new GroupBox();
             ExtraCheat = new CheckBox();
             Enable_RPC = new CheckBox();
@@ -68,6 +68,7 @@
             linkWeb = new LinkLabel();
             CheckGameRun = new System.Windows.Forms.Timer(components);
             CheckProxyRun = new System.Windows.Forms.Timer(components);
+            btGetPatches = new Button();
             grLog.SuspendLayout();
             grConfigGameLite.SuspendLayout();
             groupBox8.SuspendLayout();
@@ -103,7 +104,7 @@
             GetServerHost.Name = "GetServerHost";
             GetServerHost.PlaceholderText = "https://ps.yuuki.me";
             GetServerHost.ScrollBars = ScrollBars.Horizontal;
-            GetServerHost.Size = new Size(210, 29);
+            GetServerHost.Size = new Size(210, 34);
             GetServerHost.TabIndex = 2;
             // 
             // label2
@@ -114,7 +115,7 @@
             label2.ForeColor = Color.FromArgb(60, 60, 60);
             label2.Location = new Point(250, 22);
             label2.Name = "label2";
-            label2.Size = new Size(38, 20);
+            label2.Size = new Size(50, 25);
             label2.TabIndex = 4;
             label2.Text = "Port:";
             // 
@@ -126,7 +127,7 @@
             GetProxyPort.Font = new Font("Segoe UI", 11F);
             GetProxyPort.Location = new Point(295, 22);
             GetProxyPort.Name = "GetProxyPort";
-            GetProxyPort.Size = new Size(55, 20);
+            GetProxyPort.Size = new Size(55, 25);
             GetProxyPort.TabIndex = 5;
             GetProxyPort.Text = "2242";
             // 
@@ -137,18 +138,19 @@
             grLog.Controls.Add(EnableSendLog);
             grLog.Location = new Point(427, 143);
             grLog.Name = "grLog";
-            grLog.Size = new Size(133, 51);
+            grLog.Size = new Size(203, 51);
             grLog.TabIndex = 20;
             grLog.TabStop = false;
             grLog.Text = "Log";
+            grLog.Enter += grLog_Enter;
             // 
             // EnableShowLog
             // 
             EnableShowLog.AutoSize = true;
             EnableShowLog.Dock = DockStyle.Right;
-            EnableShowLog.Location = new Point(75, 19);
+            EnableShowLog.Location = new Point(129, 23);
             EnableShowLog.Name = "EnableShowLog";
-            EnableShowLog.Size = new Size(55, 29);
+            EnableShowLog.Size = new Size(71, 25);
             EnableShowLog.TabIndex = 4;
             EnableShowLog.Text = "Show";
             EnableShowLog.UseVisualStyleBackColor = true;
@@ -161,9 +163,9 @@
             EnableSendLog.Cursor = Cursors.Hand;
             EnableSendLog.Dock = DockStyle.Left;
             EnableSendLog.ForeColor = Color.FromArgb(60, 60, 60);
-            EnableSendLog.Location = new Point(3, 19);
+            EnableSendLog.Location = new Point(3, 23);
             EnableSendLog.Name = "EnableSendLog";
-            EnableSendLog.Size = new Size(52, 29);
+            EnableSendLog.Size = new Size(68, 25);
             EnableSendLog.TabIndex = 3;
             EnableSendLog.Text = "Send";
             EnableSendLog.UseVisualStyleBackColor = true;
@@ -174,6 +176,7 @@
             grConfigGameLite.Controls.Add(Set_LA_Select);
             grConfigGameLite.Controls.Add(Set_LA_GameFolder);
             grConfigGameLite.Controls.Add(label5);
+            grConfigGameLite.Controls.Add(label8);
             grConfigGameLite.Font = new Font("Segoe UI", 11F);
             grConfigGameLite.ForeColor = Color.FromArgb(60, 60, 60);
             grConfigGameLite.Location = new Point(4, 199);
@@ -183,6 +186,7 @@
             grConfigGameLite.TabIndex = 19;
             grConfigGameLite.TabStop = false;
             grConfigGameLite.Text = "Game Config";
+            grConfigGameLite.Enter += grConfigGameLite_Enter;
             // 
             // Set_LA_Select
             // 
@@ -192,9 +196,9 @@
             Set_LA_Select.FlatAppearance.BorderSize = 0;
             Set_LA_Select.FlatStyle = FlatStyle.Flat;
             Set_LA_Select.ForeColor = Color.White;
-            Set_LA_Select.Location = new Point(336, 18);
+            Set_LA_Select.Location = new Point(312, 22);
             Set_LA_Select.Name = "Set_LA_Select";
-            Set_LA_Select.Size = new Size(75, 33);
+            Set_LA_Select.Size = new Size(99, 33);
             Set_LA_Select.TabIndex = 9;
             Set_LA_Select.Text = "Choose";
             Set_LA_Select.UseVisualStyleBackColor = false;
@@ -205,22 +209,37 @@
             Set_LA_GameFolder.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             Set_LA_GameFolder.BackColor = Color.FromArgb(240, 240, 240);
             Set_LA_GameFolder.BorderStyle = BorderStyle.FixedSingle;
-            Set_LA_GameFolder.Location = new Point(113, 22);
+            Set_LA_GameFolder.Location = new Point(118, 23);
             Set_LA_GameFolder.Name = "Set_LA_GameFolder";
             Set_LA_GameFolder.ReadOnly = true;
-            Set_LA_GameFolder.Size = new Size(209, 27);
+            Set_LA_GameFolder.Size = new Size(188, 32);
             Set_LA_GameFolder.TabIndex = 1;
+            Set_LA_GameFolder.TextChanged += Set_LA_GameFolder_TextChanged;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 11F);
             label5.ForeColor = Color.FromArgb(60, 60, 60);
-            label5.Location = new Point(10, 24);
+            label5.Location = new Point(0, 28);
             label5.Name = "label5";
-            label5.Size = new Size(97, 20);
+            label5.Size = new Size(123, 25);
             label5.TabIndex = 0;
             label5.Text = "Game Folder:";
+            // 
+            // label8
+            // 
+            label8.Anchor = AnchorStyles.Right;
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 10F);
+            label8.ForeColor = Color.FromArgb(60, 60, 60);
+            label8.Location = new Point(6, -18);
+            label8.Name = "label8";
+            label8.Size = new Size(334, 23);
+            label8.TabIndex = 13;
+            label8.Text = "Click 'Save' to store current profile settings";
+            label8.TextAlign = ContentAlignment.MiddleCenter;
+            label8.Click += label8_Click;
             // 
             // stIsRunProxy
             // 
@@ -230,7 +249,7 @@
             stIsRunProxy.ForeColor = Color.FromArgb(60, 60, 60);
             stIsRunProxy.Location = new Point(3, 52);
             stIsRunProxy.Name = "stIsRunProxy";
-            stIsRunProxy.Size = new Size(81, 20);
+            stIsRunProxy.Size = new Size(103, 25);
             stIsRunProxy.TabIndex = 8;
             stIsRunProxy.Text = "Status: OFF";
             stIsRunProxy.TextAlign = ContentAlignment.MiddleLeft;
@@ -265,9 +284,9 @@
             btStartYuukiServer.FlatStyle = FlatStyle.Flat;
             btStartYuukiServer.Font = new Font("Segoe UI", 12F);
             btStartYuukiServer.ForeColor = Color.White;
-            btStartYuukiServer.Location = new Point(334, 26);
+            btStartYuukiServer.Location = new Point(319, 26);
             btStartYuukiServer.Name = "btStartYuukiServer";
-            btStartYuukiServer.Size = new Size(77, 31);
+            btStartYuukiServer.Size = new Size(92, 38);
             btStartYuukiServer.TabIndex = 20;
             btStartYuukiServer.Text = "YuukiPS";
             btStartYuukiServer.UseVisualStyleBackColor = false;
@@ -281,7 +300,7 @@
             GetTypeGame.ImeMode = ImeMode.NoControl;
             GetTypeGame.Location = new Point(151, 69);
             GetTypeGame.Name = "GetTypeGame";
-            GetTypeGame.Size = new Size(260, 29);
+            GetTypeGame.Size = new Size(260, 36);
             GetTypeGame.TabIndex = 14;
             GetTypeGame.SelectedIndexChanged += GetTypeGame_SelectedIndexChanged;
             // 
@@ -296,9 +315,9 @@
             btStartOfficialServer.FlatStyle = FlatStyle.Flat;
             btStartOfficialServer.Font = new Font("Segoe UI", 12F);
             btStartOfficialServer.ForeColor = Color.White;
-            btStartOfficialServer.Location = new Point(259, 26);
+            btStartOfficialServer.Location = new Point(245, 26);
             btStartOfficialServer.Name = "btStartOfficialServer";
-            btStartOfficialServer.Size = new Size(69, 31);
+            btStartOfficialServer.Size = new Size(83, 38);
             btStartOfficialServer.TabIndex = 13;
             btStartOfficialServer.Text = "Official";
             btStartOfficialServer.UseVisualStyleBackColor = false;
@@ -309,12 +328,13 @@
             Enable_WipeLoginCache.AutoSize = true;
             Enable_WipeLoginCache.Cursor = Cursors.Hand;
             Enable_WipeLoginCache.ForeColor = Color.FromArgb(60, 60, 60);
-            Enable_WipeLoginCache.Location = new Point(70, 47);
+            Enable_WipeLoginCache.Location = new Point(430, 288);
             Enable_WipeLoginCache.Name = "Enable_WipeLoginCache";
-            Enable_WipeLoginCache.Size = new Size(104, 24);
+            Enable_WipeLoginCache.Size = new Size(114, 24);
             Enable_WipeLoginCache.TabIndex = 20;
             Enable_WipeLoginCache.Text = "Wipe Login";
             Enable_WipeLoginCache.UseVisualStyleBackColor = true;
+            Enable_WipeLoginCache.CheckedChanged += Enable_WipeLoginCache_CheckedChanged;
             // 
             // grProfile
             // 
@@ -323,7 +343,6 @@
             grProfile.Controls.Add(GetProfileServer);
             grProfile.Controls.Add(btload);
             grProfile.Controls.Add(btsave);
-            grProfile.Controls.Add(label8);
             grProfile.Font = new Font("Segoe UI", 11F);
             grProfile.ForeColor = Color.FromArgb(60, 60, 60);
             grProfile.Location = new Point(4, 108);
@@ -341,7 +360,7 @@
             GetProfileServer.FormattingEnabled = true;
             GetProfileServer.Location = new Point(14, 33);
             GetProfileServer.Name = "GetProfileServer";
-            GetProfileServer.Size = new Size(194, 29);
+            GetProfileServer.Size = new Size(194, 36);
             GetProfileServer.TabIndex = 15;
             GetProfileServer.SelectedIndexChanged += GetProfileServer_SelectedIndexChanged;
             // 
@@ -379,31 +398,17 @@
             btsave.UseVisualStyleBackColor = false;
             btsave.Click += SetLASaveClick;
             // 
-            // label8
-            // 
-            label8.Anchor = AnchorStyles.Right;
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 10F);
-            label8.ForeColor = Color.FromArgb(60, 60, 60);
-            label8.Location = new Point(146, 69);
-            label8.Name = "label8";
-            label8.Size = new Size(269, 19);
-            label8.TabIndex = 13;
-            label8.Text = "Click 'Save' to store current profile settings";
-            label8.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // grExtra
             // 
             grExtra.Anchor = AnchorStyles.None;
             grExtra.BackColor = SystemColors.ButtonFace;
-            grExtra.Controls.Add(Enable_WipeLoginCache);
             grExtra.Controls.Add(ExtraCheat);
             grExtra.Controls.Add(Enable_RPC);
             grExtra.Font = new Font("Segoe UI", 11F);
             grExtra.ForeColor = Color.FromArgb(60, 60, 60);
-            grExtra.Location = new Point(4, 260);
+            grExtra.Location = new Point(4, 255);
             grExtra.Name = "grExtra";
-            grExtra.Size = new Size(217, 76);
+            grExtra.Size = new Size(217, 81);
             grExtra.TabIndex = 12;
             grExtra.TabStop = false;
             grExtra.Text = "Extra";
@@ -414,12 +419,13 @@
             ExtraCheat.Cursor = Cursors.Hand;
             ExtraCheat.Dock = DockStyle.Top;
             ExtraCheat.ForeColor = Color.FromArgb(60, 60, 60);
-            ExtraCheat.Location = new Point(3, 47);
+            ExtraCheat.Location = new Point(3, 57);
             ExtraCheat.Name = "ExtraCheat";
-            ExtraCheat.Size = new Size(211, 24);
+            ExtraCheat.Size = new Size(211, 29);
             ExtraCheat.TabIndex = 0;
             ExtraCheat.Text = "Cheat";
             ExtraCheat.UseVisualStyleBackColor = true;
+            ExtraCheat.CheckedChanged += ExtraCheat_CheckedChanged;
             // 
             // Enable_RPC
             // 
@@ -427,9 +433,9 @@
             Enable_RPC.Cursor = Cursors.Hand;
             Enable_RPC.Dock = DockStyle.Top;
             Enable_RPC.ForeColor = Color.FromArgb(60, 60, 60);
-            Enable_RPC.Location = new Point(3, 23);
+            Enable_RPC.Location = new Point(3, 28);
             Enable_RPC.Name = "Enable_RPC";
-            Enable_RPC.Size = new Size(211, 24);
+            Enable_RPC.Size = new Size(211, 29);
             Enable_RPC.TabIndex = 1;
             Enable_RPC.Text = "Rich Presence (Discord)";
             Enable_RPC.UseVisualStyleBackColor = true;
@@ -451,6 +457,7 @@
             grProxy.TabIndex = 11;
             grProxy.TabStop = false;
             grProxy.Text = "Proxy";
+            grProxy.Enter += grProxy_Enter;
             // 
             // CheckProxyEnable
             // 
@@ -460,9 +467,9 @@
             CheckProxyEnable.CheckState = CheckState.Checked;
             CheckProxyEnable.Cursor = Cursors.Hand;
             CheckProxyEnable.ForeColor = Color.FromArgb(60, 60, 60);
-            CheckProxyEnable.Location = new Point(3, 26);
+            CheckProxyEnable.Location = new Point(3, 22);
             CheckProxyEnable.Name = "CheckProxyEnable";
-            CheckProxyEnable.Size = new Size(68, 23);
+            CheckProxyEnable.Size = new Size(83, 27);
             CheckProxyEnable.TabIndex = 7;
             CheckProxyEnable.Text = "Enable";
             CheckProxyEnable.UseVisualStyleBackColor = true;
@@ -493,7 +500,7 @@
             Get_LA_Version.ForeColor = Color.FromArgb(60, 60, 60);
             Get_LA_Version.Location = new Point(8, 24);
             Get_LA_Version.Name = "Get_LA_Version";
-            Get_LA_Version.Size = new Size(120, 19);
+            Get_LA_Version.Size = new Size(147, 23);
             Get_LA_Version.TabIndex = 3;
             Get_LA_Version.Text = "Version: Unknown";
             Get_LA_Version.TextAlign = ContentAlignment.MiddleLeft;
@@ -507,7 +514,7 @@
             Get_LA_MD5.ForeColor = Color.FromArgb(60, 60, 60);
             Get_LA_MD5.Location = new Point(8, 104);
             Get_LA_MD5.Name = "Get_LA_MD5";
-            Get_LA_MD5.Size = new Size(106, 19);
+            Get_LA_MD5.Size = new Size(127, 23);
             Get_LA_MD5.TabIndex = 7;
             Get_LA_MD5.Text = "MD5: Unknown";
             Get_LA_MD5.TextAlign = ContentAlignment.MiddleLeft;
@@ -520,7 +527,7 @@
             Get_LA_CH.ForeColor = Color.FromArgb(60, 60, 60);
             Get_LA_CH.Location = new Point(8, 49);
             Get_LA_CH.Name = "Get_LA_CH";
-            Get_LA_CH.Size = new Size(125, 19);
+            Get_LA_CH.Size = new Size(154, 23);
             Get_LA_CH.TabIndex = 4;
             Get_LA_CH.Text = "Channel: Unknown";
             Get_LA_CH.TextAlign = ContentAlignment.MiddleLeft;
@@ -533,7 +540,7 @@
             Get_LA_REL.ForeColor = Color.FromArgb(50, 50, 50);
             Get_LA_REL.Location = new Point(8, 74);
             Get_LA_REL.Name = "Get_LA_REL";
-            Get_LA_REL.Size = new Size(128, 20);
+            Get_LA_REL.Size = new Size(164, 25);
             Get_LA_REL.TabIndex = 5;
             Get_LA_REL.Text = "Release: Unknown";
             Get_LA_REL.TextAlign = ContentAlignment.MiddleLeft;
@@ -567,9 +574,9 @@
             // 
             linkDiscord.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             linkDiscord.AutoSize = true;
-            linkDiscord.Location = new Point(93, 356);
+            linkDiscord.Location = new Point(94, 351);
             linkDiscord.Name = "linkDiscord";
-            linkDiscord.Size = new Size(47, 15);
+            linkDiscord.Size = new Size(65, 20);
             linkDiscord.TabIndex = 13;
             linkDiscord.TabStop = true;
             linkDiscord.Text = "Discord";
@@ -579,10 +586,10 @@
             // 
             linkGithub.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             linkGithub.AutoSize = true;
-            linkGithub.Location = new Point(7, 356);
+            linkGithub.Location = new Point(14, 351);
             linkGithub.Margin = new Padding(0, 0, 5, 0);
             linkGithub.Name = "linkGithub";
-            linkGithub.Size = new Size(43, 15);
+            linkGithub.Size = new Size(58, 20);
             linkGithub.TabIndex = 14;
             linkGithub.TabStop = true;
             linkGithub.Text = "Github";
@@ -591,10 +598,10 @@
             // linkWeb
             // 
             linkWeb.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            linkWeb.Location = new Point(55, 356);
+            linkWeb.Location = new Point(180, 351);
             linkWeb.Margin = new Padding(0, 0, 5, 0);
             linkWeb.Name = "linkWeb";
-            linkWeb.Size = new Size(31, 15);
+            linkWeb.Size = new Size(82, 23);
             linkWeb.TabIndex = 15;
             linkWeb.TabStop = true;
             linkWeb.Text = "Web";
@@ -612,10 +619,23 @@
             CheckProxyRun.Interval = 1000;
             CheckProxyRun.Tick += CheckProxyRunTick;
             // 
+            // btGetPatches
+            // 
+            btGetPatches.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btGetPatches.Location = new Point(430, 225);
+            btGetPatches.Name = "btGetPatches";
+            btGetPatches.Size = new Size(100, 32);
+            btGetPatches.TabIndex = 21;
+            btGetPatches.Text = "Get Patches";
+            btGetPatches.UseVisualStyleBackColor = true;
+            btGetPatches.Click += btGetPatches_Click;
+            // 
             // Main
             // 
             AutoScaleMode = AutoScaleMode.None;
-            ClientSize = new Size(644, 380);
+            ClientSize = new Size(642, 372);
+            Controls.Add(Enable_WipeLoginCache);
+            Controls.Add(btGetPatches);
             Controls.Add(grLog);
             Controls.Add(linkWeb);
             Controls.Add(grConfigGameLite);
@@ -642,7 +662,6 @@
             groupBox8.ResumeLayout(false);
             groupBox8.PerformLayout();
             grProfile.ResumeLayout(false);
-            grProfile.PerformLayout();
             grExtra.ResumeLayout(false);
             grExtra.PerformLayout();
             grProxy.ResumeLayout(false);
@@ -694,5 +713,6 @@
         private GroupBox grLog;
         private CheckBox EnableShowLog;
         private CheckBox EnableSendLog;
+        private Button btGetPatches;
     }
 }

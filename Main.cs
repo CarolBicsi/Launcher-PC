@@ -1286,5 +1286,70 @@ namespace YuukiPS_Launcher
         {
             MessageBox.Show("This deletes the login cache every time the game closes (logs you out).\nThis is useful if you use the guest account on HSR servers, since you don't have to remember to log out.", "Information.", MessageBoxButtons.OK, MessageBoxIcon.Question);
         }
+
+        private void btGetPatches_Click(object sender, EventArgs e)
+        {
+            if (getPatch == null)
+            {
+                MessageBox.Show("Please select your game folder first to check for patch information.", "Patch Info Not Loaded", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (getPatch.Patched != null && getPatch.Patched.Any())
+            {
+                var patchUrls = new System.Text.StringBuilder();
+                patchUrls.AppendLine("The following patch files are available for your game version:");
+                patchUrls.AppendLine();
+
+                foreach (var patchFile in getPatch.Patched)
+                {
+                    patchUrls.AppendLine(patchFile.File);
+                }
+
+                patchUrls.AppendLine();
+                patchUrls.AppendLine("You can use these URLs to download the patch files.");
+
+                MessageBox.Show(patchUrls.ToString(), "Available Patches", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("No patches are available for your current game version.", "No Patches Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void Enable_WipeLoginCache_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ExtraCheat_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grConfigGameLite_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Set_LA_GameFolder_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grLog_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grProxy_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
